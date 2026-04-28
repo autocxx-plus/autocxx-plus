@@ -1,5 +1,5 @@
 To build this example:
-* `git submodule update --init --recursive s2geometry`
+* `git clone https://github.com/google/s2geometry.git`
 * `cargo run`
 
 Thanks to @nside for inspiring this example.
