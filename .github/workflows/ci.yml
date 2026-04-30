@@ -4,7 +4,7 @@ on:
   push:
     branches: [main]
   pull_request:
-  schedule: [cron: "40 1 * * *"]
+  #schedule: [cron: "40 1 * * *"]
   workflow_dispatch:
 
 env:
@@ -32,10 +32,9 @@ jobs:
           - name: macOS
             rust: nightly
             os: macos
-          # Windows GNU disabled due to https://github.com/google/autocxx/issues/1134
-          # - name: Windows (gnu)
-          #    rust: nightly-x86_64-pc-windows-gnu
-          #    os: windows
+          - name: Windows (gnu)
+            rust: nightly-x86_64-pc-windows-gnu
+            os: windows
           - name: Windows (msvc)
             rust: nightly-x86_64-pc-windows-msvc
             os: windows
@@ -122,7 +121,9 @@ jobs:
         working-directory: ./examples/s2
         # s2 doesn't link on Windows
         if: matrix.os != 'windows'
-        run: cargo build
+        run: |
+          git clone https://github.com/google/s2geometry.git
+          cargo build
       - name: Build steam example
         working-directory: ./examples/steam-mini
         run: cargo build
