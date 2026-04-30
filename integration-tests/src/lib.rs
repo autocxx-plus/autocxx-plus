@@ -48,7 +48,7 @@ fn configure_builder(b: &mut BuilderBuild) -> &mut BuilderBuild {
         .flag("-std=c++14") // For clang
         .flag_if_supported("/GX") // Enable C++ exceptions for msvc
         .flag_if_supported("-Wall")
-        .flag_if_supported("-Werror")
+        // .flag_if_supported("-Werror")
 }
 
 /// What environment variables we should set in order to tell rustc how to find

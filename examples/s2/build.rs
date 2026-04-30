@@ -11,8 +11,9 @@ fn main() -> miette::Result<()> {
     // C++ codegen and the macro codegen appears to be run from different
     // working directories.
     let path = std::path::PathBuf::from("s2geometry/src");
-    let path2 = std::path::PathBuf::from("src");
-    let mut b = autocxx_build::Builder::new("src/main.rs", &[&path, &path2]).build()?;
+    let path2 = std::path::PathBuf::from("abseil-cpp");
+    let path3 = std::path::PathBuf::from("src");
+    let mut b = autocxx_build::Builder::new("src/main.rs", &[&path, &path2, &path3]).build()?;
     b.flag_if_supported("-std=c++14")
         .compile("autocxx-s2-example");
     println!("cargo:rerun-if-changed=src/main.rs");
