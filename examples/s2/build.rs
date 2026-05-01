@@ -11,21 +11,10 @@ fn main() -> miette::Result<()> {
     // C++ codegen and the macro codegen appears to be run from different
     // working directories.
     let path = std::path::PathBuf::from("s2geometry/src");
-    let path2 = std::path::PathBuf::from("abseil-cpp");
-    let path3 = std::path::PathBuf::from("src");
-    let mut b = autocxx_build::Builder::new("src/main.rs", &[&path, &path2, &path3])
-        .extra_clang_args(&["-std=c++17"])
-        .build()?;
-    b.std("c++17")
-        .flag_if_supported("-std=c++17")
+    let path2 = std::path::PathBuf::from("src");
+    let mut b = autocxx_build::Builder::new("src/main.rs", &[&path, &path2]).build()?;
+    b.flag_if_supported("-std=c++14")
         .compile("autocxx-s2-example");
-
-    // Link absl
-    println!("cargo:rustc-link-lib=absl_log");
-    println!("cargo:rustc-link-lib=absl_log_internal_check_op");
-    println!("cargo:rustc-link-lib=absl_log_internal_message");
-    println!("cargo:rustc-link-lib=absl_base");
-
     println!("cargo:rerun-if-changed=src/main.rs");
     Ok(())
 }
