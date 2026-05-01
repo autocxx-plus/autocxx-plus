@@ -4567,6 +4567,7 @@ fn test_string_in_struct() {
     let hdr = indoc! {"
         #include <string>
         #include <memory>
+        #include <cstdint> 
         struct A {
             std::string a;
         };
@@ -4592,6 +4593,7 @@ fn test_up_in_struct() {
     let hdr = indoc! {"
         #include <string>
         #include <memory>
+        #include <cstdint>
         struct A {
             std::unique_ptr<std::string> a;
         };
@@ -4643,6 +4645,7 @@ fn test_typedef_to_up_in_struct() {
     let hdr = indoc! {"
         #include <string>
         #include <memory>
+        #include <cstdint>
         typedef std::unique_ptr<std::string> my_string;
         struct A {
             my_string a;
@@ -4896,6 +4899,7 @@ fn test_specialization() {
     #include <stdint.h>
     #include <string>
     #include <type_traits>
+    #include <cstdint>
 
     template <typename T, bool = std::is_trivially_destructible<T>::value>
     struct OptionalStorageBase {
