@@ -14,7 +14,7 @@ fn main() -> miette::Result<()> {
     let path2 = std::path::PathBuf::from("abseil-cpp");
     let path3 = std::path::PathBuf::from("src");
     let mut b = autocxx_build::Builder::new("src/main.rs", &[&path, &path2, &path3]).build()?;
-    b.flag_if_supported("-std=c++14")
+    b.flag_if_supported("-std=c++17")
         .compile("autocxx-s2-example");
     println!("cargo:rerun-if-changed=src/main.rs");
     Ok(())

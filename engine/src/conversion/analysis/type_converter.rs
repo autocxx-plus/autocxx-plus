@@ -620,6 +620,7 @@ impl<'a> TypeConverter<'a> {
                             }
                         }
                         CxxGenericType::CppPtr => {
+                            #[expect(clippy::collapsible_match)]
                             if !known_types().permissible_within_unique_ptr(&inner_qn) {
                                 return Err(ConvertErrorFromCpp::InvalidTypeForCppPtr(inner_qn));
                             }
