@@ -13,8 +13,12 @@ fn main() -> miette::Result<()> {
     let path = std::path::PathBuf::from("s2geometry/src");
     let path2 = std::path::PathBuf::from("abseil-cpp");
     let path3 = std::path::PathBuf::from("src");
-    let mut b = autocxx_build::Builder::new("src/main.rs", &[&path, &path2, &path3]).build()?;
-    b.std("c++17").compile("autocxx-s2-example");
+    let mut b = autocxx_build::Builder::new("src/main.rs", &[&path, &path2, &path3])
+        .extra_clang_args(&["-std=c++17"])
+        .build()?;
+    b.std("c++17")
+        .flag_if_supported("-std=c++17")
+        .compile("autocxx-s2-example");
     println!("cargo:rerun-if-changed=src/main.rs");
     Ok(())
 }

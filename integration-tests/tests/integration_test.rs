@@ -4507,6 +4507,7 @@ fn test_typedef_to_up_in_fn_call() {
     let hdr = indoc! {"
         #include <string>
         #include <memory>
+        #include <cstdint>
         typedef std::unique_ptr<std::string> my_string;
         inline uint32_t take_str(my_string a) {
             return a->size();
@@ -11683,6 +11684,7 @@ fn test_recursive_field_indirect() {
 }
 
 #[test]
+#[cfg_attr(skip_windows_gnu_failing_tests, ignore)]
 #[cfg_attr(skip_windows_msvc_failing_tests, ignore)]
 // MSVC failure appears to be https://github.com/rust-lang/rust-bindgen/issues/3159
 fn test_typedef_unsupported_type_pub() {
@@ -11708,6 +11710,7 @@ fn test_typedef_unsupported_type_pub() {
 }
 
 #[test]
+#[cfg_attr(skip_windows_gnu_failing_tests, ignore)]
 #[cfg_attr(skip_windows_msvc_failing_tests, ignore)]
 // MSVC failure appears to be https://github.com/rust-lang/rust-bindgen/issues/3159
 fn test_typedef_unsupported_type_pri() {
