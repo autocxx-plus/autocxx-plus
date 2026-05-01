@@ -19,6 +19,13 @@ fn main() -> miette::Result<()> {
     b.std("c++17")
         .flag_if_supported("-std=c++17")
         .compile("autocxx-s2-example");
+
+    // Link absl
+    println!("cargo:rustc-link-lib=absl_log");
+    println!("cargo:rustc-link-lib=absl_log_internal_check_op");
+    println!("cargo:rustc-link-lib=absl_log_internal_message");
+    println!("cargo:rustc-link-lib=absl_base");
+
     println!("cargo:rerun-if-changed=src/main.rs");
     Ok(())
 }
